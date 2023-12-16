@@ -1,5 +1,4 @@
 import requests
-from protobuf_to_dict import protobuf_to_dict
 
 import tfnsw_gtfs_realtime_pb2
 import tfnsw_gtfs_realtime_pb2 as transit_realtime
@@ -10,10 +9,10 @@ with open("apiKey", "r") as f:
 url = "https://api.transport.nsw.gov.au/v1/gtfs/vehiclepos/buses"
 headers = {"Authorization": f"apikey {apiKey}"}
 
-req = requests.get(url, headers=headers)
+response = requests.get(url, headers=headers)
 
 feed = tfnsw_gtfs_realtime_pb2.FeedMessage()
-feed.ParseFromString(req.content)
+feed.ParseFromString(response.content)
 
 matching_counter = 0
 
